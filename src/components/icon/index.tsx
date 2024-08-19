@@ -1,23 +1,30 @@
-import { IconExclamationCircleFilled, IconMoonFilled, IconSunFilled } from "@tabler/icons-react";
+import { IconBroadcast, IconExclamationCircleFilled, IconHome, IconLogout2, IconMoonFilled, IconStack, IconSunFilled, IconSword, IconUser } from "@tabler/icons-react";
 import { useMemo } from "react";
 
 const ICONS = {
     error: IconExclamationCircleFilled,
     light: IconSunFilled,
-    dark: IconMoonFilled
+    dark: IconMoonFilled,
+    home: IconHome,
+    combat: IconSword,
+    scene: IconStack,
+    character: IconUser,
+    logout: IconLogout2,
+    session: IconBroadcast
 } as const
 
-type IconName = keyof typeof ICONS;
+export type IconName = keyof typeof ICONS;
 
 
 interface IconProps {
     name: IconName
+    stroke?: number
 }
 
-const Icon = ({ name }: IconProps) => {
+const Icon = ({ name, stroke }: IconProps) => {
     const IconComponent = useMemo(() => ICONS[name] ?? ICONS['error'], [name]);
 
-    return <IconComponent />
+    return <IconComponent stroke={stroke}/>
 }
 
 export default Icon;

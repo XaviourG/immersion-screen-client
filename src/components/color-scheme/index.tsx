@@ -1,6 +1,6 @@
-import { Button, useMantineColorScheme } from "@mantine/core";
+import { useMantineColorScheme } from "@mantine/core";
 import { useCallback } from "react";
-import Icon from "../icon";
+import SideNavLink from "../nav/sidebar/link";
 
 const ColorSchemeToggle = () => {
     const { setColorScheme, colorScheme } = useMantineColorScheme();
@@ -9,9 +9,7 @@ const ColorSchemeToggle = () => {
         setColorScheme(colorScheme === 'light' ? 'dark' : 'light')
     }, [colorScheme, setColorScheme]);
 
-    return <Button onClick={handleToggle}>
-        <Icon name={colorScheme === 'light' ? 'dark' : 'light'} />
-    </Button>
+    return <SideNavLink icon={colorScheme === 'light' ? 'dark' : 'light'} label={colorScheme === 'light' ? 'Dark Mode' : 'Light Mode'} onClick={handleToggle}/>
 };
 
 export default ColorSchemeToggle
