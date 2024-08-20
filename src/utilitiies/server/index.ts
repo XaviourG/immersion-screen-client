@@ -23,14 +23,17 @@ class ServerAgent {
 
     constructor() {
         this.agent = new Axios({
-            baseURL: Env.get('SERVER_URL'),
-            withCredentials: true
+            baseURL: Env.get('VITE_SERVER_URL'),
+            withCredentials: true,
+            headers: {
+                'Content-Type': 'Application/Json'
+            }
         });
     }
 
     get = async <T>(route: string, config?: AxiosRequestConfig): Promise<ServerResponse<T>> => {
         try {
-            const response = await this.agent.get(route, config);
+            const response = await this.agent.get(route, { ...config, withCredentials: true });
             return parsePotentialSuccess(response);
         } catch (error) {
             console.error(error);
@@ -40,7 +43,7 @@ class ServerAgent {
 
     post = async <T>(route: string, body: AnyObject, config?: AxiosRequestConfig): Promise<ServerResponse<T>> => {
         try {
-            const response = await this.agent.post(route, body, config);
+            const response = await this.agent.post(route, JSON.stringify(body), { ...config, withCredentials: true });
             return parsePotentialSuccess(response);
         } catch (error) {
             console.error(error);

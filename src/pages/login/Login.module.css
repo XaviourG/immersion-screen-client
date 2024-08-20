@@ -1,0 +1,16 @@
+.form {
+    padding: rem(20px);
+    padding-bottom: rem(60px);
+    display: flex;
+    flex-direction: column;
+    gap: rem(10px);
+    align-items: center;
+}
+
+.logo {
+    max-width: 40%;
+}
+
+.input {
+    min-width: 100%;
+}
