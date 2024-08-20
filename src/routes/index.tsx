@@ -2,6 +2,7 @@ import { createBrowserRouter, Outlet, RouteObject, RouterProvider } from 'react-
 import LoginPage from '../pages/login';
 import PublicLayout from '../layouts/public';
 import UserLayout from '../layouts/user';
+import SocketLayout from '../layouts/socket';
 
 const PUBLIC_ROUTES: RouteObject[] = [
   {
@@ -37,11 +38,20 @@ const USER_ROUTES: RouteObject[] = [
   }
 ]
 
+const SOCKET_ROUTE: RouteObject =  {
+  path: 'live',
+  element: <SocketLayout/>,
+  children: [{
+    path: ':session?',
+    element: <div>Livee</div>
+  }]
+}
+
 const ROUTES = createBrowserRouter([
     {
       path: '/',
       element: <Outlet/>,
-      children: [...PUBLIC_ROUTES, ...USER_ROUTES]
+      children: [...PUBLIC_ROUTES, ...USER_ROUTES, SOCKET_ROUTE]
     },
   ]);
 
